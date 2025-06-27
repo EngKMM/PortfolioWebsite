@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.set_page_config(layout='wide')
 
@@ -17,3 +18,21 @@ with col2:
     st.info(content)
 
 st.text("Below you can find some of the projects I've been working on. Enjoy! Also don't hesitate to contact me if you like what you see.")
+
+col3,empty_column ,col4 = st.columns([1.5,0.5,1.5])
+
+df = pd.read_csv('data.csv', sep=";")
+
+with col3:
+    for index,rows in df[:10].iterrows():
+        st.header(rows['title'])
+        st.write(rows['description'])
+        st.image('images/'+rows['image'])
+        st.write(f"[Source Code]({rows['url']})")
+
+with col4:
+    for index,rows in df[10:].iterrows():
+        st.header(rows['title'])
+        st.write(rows['description'])
+        st.image('images/' + rows['image'])
+        st.write(f"[Source Code]({rows['url']})")
