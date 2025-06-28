@@ -1,4 +1,5 @@
 import smtplib, ssl
+import streamlit as st
 from dotenv import load_dotenv
 from pathlib import Path
 import os
@@ -13,7 +14,7 @@ def send_email(message):
     context = ssl.create_default_context()
 
     username = "karimgohary.gohary@gmail.com"
-    password = os.getenv("PORTFOLIO_EMAIL_PASSWORD")
+    password = os.getenv("PORTFOLIO_EMAIL_PASSWORD") or st.secrets.get("PORTFOLIO_EMAIL_PASSWORD")
 
     receiver = "karimgohary.gohary@gmail.com"
 
